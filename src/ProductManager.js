@@ -51,7 +51,7 @@ class ProductManager {
         await fs.promises.writeFile(this.#path, JSON.stringify(products))
 
     }
-
+        // Actualizacion de UpdateProduct .
     async updateProduct(id, data) {
         let products = await this.getProducts()
 
