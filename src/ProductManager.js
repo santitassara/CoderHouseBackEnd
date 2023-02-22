@@ -2,32 +2,29 @@
 import fs from "fs"
 
 class ProductManager {
-    //Se crea el acumulador para no repetir los id cada vez que se agregue uno.
-    
     #acumId = 0
     #path = ""
 
-    constructor(path){
+    constructor(path) {
         this.#path = path
     }
 
-    async getProducts(){
-        try{
+    async getProducts() {
+        try {
             const products = await fs.promises.readFile(this.#path, "utf-8")
             return JSON.parse(products)
-        }catch{
+        } catch {
             return []
         }
     }
 
-    //Se creo un get para que se pueda acceder al acumulador.
-    get acum(){
-      return   this.#acumId++
-        
+    get acum() {
+        return this.#acumId++
+
     }
 
-    async addProduct(title, description, price, thumbnail, code, stock){
-        
+    async addProduct(title, description, price, thumbnail, code, stock) {
+
         const product = {
             title,
             description,
@@ -35,30 +32,30 @@ class ProductManager {
             thumbnail,
             code,
             stock,
-            id : this.acum,
+            id: this.acum,
         }
 
         let products = await this.getProducts()
         let verify = Object.values(product)
-        let sameCode = products.find( prod => prod.code === product.code)
+        let sameCode = products.find(prod => prod.code === product.code)
 
-        if (!verify){
+        if (!verify) {
             throw new Error(`El producto ${product.title} NO ha sido cargado, debe completar todos los datos.`)
         }
-        if(sameCode){
+        if (sameCode) {
             throw new Error(`El producto ${product.title} NO ha sido cargado ya que la propiedad "code" está repetida, ${sameCode.title} tiene el mismo valor.`)
         }
-    
+
         products = [...products, product]
         console.log(`${product.title} cargado correctamente.`)
         await fs.promises.writeFile(this.#path, JSON.stringify(products))
 
     }
 
-    async updateProduct(id, data){
+    async updateProduct(id, data) {
         let products = await this.getProducts()
 
-        const updateProducts = products.map((p)=>{
+        const updateProducts = products.map((p) => {
             if (p.id === id) {
                 return {
                     ...p,
@@ -73,12 +70,12 @@ class ProductManager {
         console.log('Modificación realizada con éxito.')
     }
 
-    async getProductById(id){
+    async getProductById(id) {
         const result = await this.getProducts().find(product => product.id == id)
         return result === undefined ? console.log("Not found") : console.log(result)
     }
-    
-    async deleteProduct(id){
+
+    async deleteProduct(id) {
         let products = await this.getProducts()
         let newProducts = products.filter(prods => prods.id !== id)
         await fs.promises.writeFile(this.#path, JSON.stringify(newProducts))
