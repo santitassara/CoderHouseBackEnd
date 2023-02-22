@@ -2,10 +2,10 @@ import ProductManager from "./ProductManager.js";
 import express from "express"
 
 const manager = new ProductManager("./products.json")
- //await manager.addProduct("Tablero de Madera", "Tablero Ajedrez de madera.", 43000, "thumbail", "code1", 10)
- //await manager.addProduct("Tablero de Vinilo", "Tablero Ajedrez de vinilo.", 10000, "thumbail", "code2", 20)
- //await manager.addProduct("Tablero Imantado ", "Tablero Ajedrez Imantado.", 69000, "thumbail", "code3", 30)
- //await manager.addProduct("Tablero Triple", "Tablero Ajedrez Triple.", 19000, "thumbail", "code4", 40)
+ await manager.addProduct("Tablero de Madera", "Tablero Ajedrez de madera.", 43000, "thumbail", "code1", 10)
+ await manager.addProduct("Tablero de Vinilo", "Tablero Ajedrez de vinilo.", 10000, "thumbail", "code2", 20)
+ await manager.addProduct("Tablero Imantado ", "Tablero Ajedrez Imantado.", 69000, "thumbail", "code3", 30)
+ await manager.addProduct("Tablero Triple", "Tablero Ajedrez Triple.", 19000, "thumbail", "code4", 40)
 
 
 
