@@ -2,10 +2,10 @@ import ProductManager from "./ProductManager.js";
 import express from "express"
 
 const manager = new ProductManager("./products.json")
- await manager.addProduct("Silla Gamer", "Silla gamer muy cómoda de alta calidad.", 43000, "thumbail", "code1", 10)
- await manager.addProduct("Teclado Redragon", "Teclado Redragron 60% ideal para el gaming.", 10000, "thumbail", "code2", 20)
- await manager.addProduct("Procesador Ryzen 5 3500u", "Procesador para computadora.", 69000, "thumbail", "code3", 30)
- await manager.addProduct("Mouse gamer inaámbrico", "Mouse gamer con rgb.", 19000, "thumbail", "code4", 40)
+ //await manager.addProduct("Silla Gamer", "Silla gamer muy cómoda de alta calidad.", 43000, "thumbail", "code1", 10)
+ //await manager.addProduct("Teclado Redragon", "Teclado Redragron 60% ideal para el gaming.", 10000, "thumbail", "code2", 20)
+ //await manager.addProduct("Procesador Ryzen 5 3500u", "Procesador para computadora.", 69000, "thumbail", "code3", 30)
+ //await manager.addProduct("Mouse gamer inaámbrico", "Mouse gamer con rgb.", 19000, "thumbail", "code4", 40)
 
 
 
