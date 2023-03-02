@@ -33,8 +33,9 @@ productsRouter.get("/:pid", async (req, res)=>{
 
 productsRouter.post("/", async (req,res)=>{
   try{
-      // En el body no envío "thumbail" ni "status", los defino por defecto hasta que tenga que cambiarlo
+     
       const {title, description, price, thumbnail=[], code, stock, status=true, category} = req.body
+      
       await manager.addProduct(title, description, parseInt(price), thumbnail, code, parseInt(stock), status, category)
 
       res.send({status: "success", payload: req.body})

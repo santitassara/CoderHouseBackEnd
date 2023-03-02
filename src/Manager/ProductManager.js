@@ -14,16 +14,28 @@ class ProductManager {
             const products = await fs.promises.readFile(this.#path, "utf-8")
             return JSON.parse(products)
         } catch {
-            return [{}]
+            return []
         }
     }
 
-    get acum() {
-        return this.#acumId++
-
+    async getIdNumber(){
+        let products = await this.getProducts()
+        
+        let ids = products.map( p => p.id)
+        
+        let higherId = Math.max(...ids);
+        if (higherId === -Infinity) {
+          return 0;
+        } else {
+          return ++higherId;
+        }
     }
 
     async addProduct(title, description, price, thumbnail, code, stock, status, category) {
+
+        try {
+            
+        let higherId = await this.getIdNumber()
 
         const product = {
             title,
@@ -32,9 +44,9 @@ class ProductManager {
             thumbnail,
             code,
             stock,
-            id: this.acum,
-            status:status,
-            category:category,
+            id: higherId,
+            status: status,
+            category: category,
         }
 
         let products = await this.getProducts()
@@ -51,7 +63,9 @@ class ProductManager {
         products = [...products, product]
         console.log(`${product.title} cargado correctamente.`)
         await fs.promises.writeFile(this.#path, JSON.stringify(products))
-
+        } catch (err) {
+                 throw new Error(err)   
+        }
     }
         // Actualizacion de UpdateProduct .
     async updateProduct(id, data) {

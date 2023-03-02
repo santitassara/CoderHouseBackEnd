@@ -29,6 +29,7 @@ cartsRouter.post("/:cid/products/:pid", async (req,res)=>{
         const prodID = parseInt(pid)
         const cartID = parseInt(cid)
         let product = await manager.getProductById(prodID)
+      
         await cartManager.addProductToCart(product, cartID)
         res.send({status: "success", payload: await cartManager.getCartProducts(cartID)})
     }catch(err){

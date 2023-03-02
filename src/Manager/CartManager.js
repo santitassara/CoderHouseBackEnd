@@ -57,10 +57,12 @@ class CartManager {
     try {
       let carts = await this.getCarts()
       let cart = await this.getCartProducts(cartID)
-
-
+      
+      if(prod.id === undefined){
+        throw new Error("Producto inexistente");
+      }
       let prodInCart = cart.products.find(p => p.id === prod.id)
-
+      
       if (prodInCart) {
         prodInCart.quantity += 1
         let filterProducts = cart.products.filter(p => p.id !== prodInCart.id)
