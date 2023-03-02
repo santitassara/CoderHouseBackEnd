@@ -14,7 +14,7 @@ class ProductManager {
             const products = await fs.promises.readFile(this.#path, "utf-8")
             return JSON.parse(products)
         } catch {
-            return []
+            return [{}]
         }
     }
 
@@ -23,7 +23,7 @@ class ProductManager {
 
     }
 
-    async addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(title, description, price, thumbnail, code, stock, status, category) {
 
         const product = {
             title,
@@ -33,6 +33,8 @@ class ProductManager {
             code,
             stock,
             id: this.acum,
+            status:status,
+            category:category,
         }
 
         let products = await this.getProducts()
@@ -71,8 +73,9 @@ class ProductManager {
     }
 
     async getProductById(id) {
-        const result = await this.getProducts().find(product => product.id == id)
-        return result === undefined ? console.log("Not found") : console.log(result)
+        const products = await this.getProducts()
+        const productId = products.find(product => product.id == id)
+        return productId === undefined ? [{Error:"NOT FOUND"}] : productId
     }
 
     async deleteProduct(id) {
