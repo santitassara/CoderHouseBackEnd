@@ -8,8 +8,8 @@ import { Server } from "socket.io";
 import __dirname from "./utils.js";
 import viewsRouter from "./routes/ViewsRouter.js";
 
-const manager = new ProductManager("./src/jsons/products/products.json")
-const cartManager = new CartManager("./src/jsons/carts/cart.json")
+const manager = new ProductManager("./src/Json/products/products.json")
+const cartManager = new CartManager("./src/Json/carts/cart.json")
 
 const app = express()
 app.use(json())
